@@ -1,29 +1,19 @@
-version: '3'
 services:
-  app:
-    image: candaescedric/hello-app
   server:
-    image: express-docker
+    build: ./server
     ports:
-      - 5051:5006
-    command: npm run start
+      - 5050:5000
     volumes:
-      - ./server/src/:/app/src/
+      - ./server:/app
   mongodb:
     image: mongo
     volumes:
       - ./data:/data/db
   client:
-    build:
-      context: ./client
-      dockerfile: Dockerfile
+    build: ./client
     ports:
-      - 8080:5003
+      - 3000:3000
     volumes:
-      - type: bind
-        source: ./
-        target: /home/node
-      - type: volume
-        target: /home/node/node_modules
+      - ./client:/app
     depends_on:
       - server

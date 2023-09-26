@@ -22,7 +22,7 @@ process.on("SIGTERM", () => {
   });
   console.log("Connected");
 
-  app.get("/", (req, res) => {
+  app.get("/home", (req, res) => {
     console.log("Got a request");
     res.json({ message: "Hey, I'm Tom, the API" });
   });
